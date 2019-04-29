@@ -1,16 +1,20 @@
 <template>
 <div class="app">
   <router-view/>
-  <FooterGuide/>
+  <FooterGuide v-show="$route.meta.isShowFooter"/>
 </div>
 </template>
 
 <script>
-  import FooterGuide from './components/FooterGuide/FooterGuide'
+import FooterGuide from './components/FooterGuide/FooterGuide'
 export default {
   name: 'App',
   components: {
     FooterGuide
+  },
+  async mounted () {
+    this.$store.dispatch('getAddress')
+    this.$store.dispatch('getUserInfo')
   }
 }
 </script>
