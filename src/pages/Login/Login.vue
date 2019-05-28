@@ -18,9 +18,12 @@
                        :class="{right_phone_number:isPhone}" @click.prevent="sendCode">
                {{computeTime>0 ? `已发送(${computeTime}S)`: ' 获取验证码'}}
               </button>
+              <span style="color: red">{{errors.first('phone')}}</span>
             </section>
             <section class="login_verification">
-              <input type="tel" maxlength="8" placeholder="验证码" v-model="code" name="code" v-validate="{required: true,regex: /^\d{6}$/}">
+              <input type="tel" maxlength="8" placeholder="验证码" v-model="code"
+                     name="code" v-validate="{required: true,regex: /^\d{6}$/}">
+              <span style="color: red">{{errors.first('code')}}</span>
             </section>
             <section class="login_hint">
               温馨提示：未注册硅谷外卖帐号的手机号，登录时将自动注册，且代表已同意
@@ -32,6 +35,7 @@
               <section class="login_message">
                 <input type="tel" maxlength="11" placeholder="手机/邮箱/用户名" v-model="name"
                        name="name" v-validate="'required'">
+                <span style="color: red">{{errors.first('name')}}</span>
               </section>
               <section class="login_verification">
                 <input :type="isShowPwd ? 'text' : 'password'" maxlength="8" placeholder="密码" v-model="pwd"
@@ -42,11 +46,13 @@
                     {{isShowPwd ? 'abc ': '...'}}
                   </span>
                 </div>
+                <span style="color: red">{{errors.first('pwd')}}</span>
               </section>
               <section class="login_message">
                 <input type="text" maxlength="11" placeholder="验证码" v-model="captcha"
                 name="captcha" v-validate="{required: true, regex: /^.{4}$/}">
                 <img ref="getCaptcha" class="get_verification"  src="http://localhost:5000/captcha" alt="captcha" @click="getCaptcha">
+                <span style="color: red">{{errors.first('captcha')}}</span>
               </section>
             </section>
           </div>

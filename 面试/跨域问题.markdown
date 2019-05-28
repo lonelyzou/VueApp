@@ -1,0 +1,99 @@
+##跨域
+###同源策略
+同源策略(Same-Origin Policy)最早由 Netscape 公司提出，是浏览器的一种安全策略。
+同源： 协议、域名、端口号 必须完全相同。
+违背同源策略就是跨域。
+###如何解决跨域
+#### JSONP
+#####JSONP是什么
+JSONP(JSON with Padding)，是一个非官方的跨域解决方案，纯粹凭借程序员的聪明才智开发出来，只支持get请求。
+#####jsonp特点：
+              1. 利用script标签天然跨域跨域的特性解决跨域的， 民间推出的
+              2. 兼容性极好
+#####JSONP怎么工作的？
+ * 在网页有一些标签天生具有跨域能力，比如：img link iframe script。
+JSONP就是利用script标签的跨域能力来发送请求的。
+#####JSONP的使用
+ ```
+    <button id="btn">点击发送请求</button>
+    <script type="text/javascript">
+      document.getElementById('btn').onclick = function () {  
+        //创建一个script标签
+        const script = document.createElement('script');
+        
+        //设置了响应成功的回调函数
+        window.jsoncallback = function (data) {
+          console.log(data);
+        }
+        
+        //设置script的src属性， 向指定服务器发送请求
+        script.src = 'http://localhost:3000/?callback=jsoncallback';
+        
+        //添加到body中生效
+        document.body.appendChild(script);
+      }
+    
+    </script>
+    
+    服务器中路由的处理
+   app.get('/', (req, res) => {
+       //获取请求参数
+    const { callback } = req.query;
+     //定义响应的数据
+    const person = {
+      name: 'jack',
+      age: 18
+    }
+   //返回响应  jsonp ---> json with padding
+   res.send(`${callback}(${JSON.stringify(person)})`);  
+   // jsoncallback({"name": "jack", "age": 18})
+  
+})
+
+* jQuery中的JSONP
+```
+
+  <button id="btn">按钮</button>
+  <ul id="list"></ul>
+  <script type="text/javascript" src="./jquery-1.12.3.js"></script>
+  <script type="text/javascript">
+    window.onload = function () {
+      var btn = document.getElementById('btn')
+      btn.onclick = function () {
+        $.getJSON("http://api.douban.com/v2/movie/in_theaters?callback=?",function (data) {
+          console.log(data);
+          //获取所有的电影的条目
+          var subjects = data.subjects;
+          //遍历电影条目
+          for(var i=0 ; i<subjects.length ; i++){
+            $("#list").append("<li>"+
+              subjects[i].title+"<br />"+
+              "<img src=\""+subjects[i].images.large+"\" >"+
+              "</li>");
+          }
+        });
+      }
+    }
+  </script>
+
+####CORS
+#####CORS是什么？
+CORS（Cross-Origin Resource Sharing），跨域资源共享。CORS是官方的跨域解决方案，它的特点是不需要在客户端做任何特殊的操作，完全在服务器中进行处理，支持get和post请求。
+#####CORS怎么工作的？
+CORS是通过设置一个响应头来告诉浏览器，该请求允许跨域，浏览器收到该响应以后就会对响应放行。
+#####cors特点：
+        - 官方推出解决跨域的方案，使用起来及其简单，只需在服务器设置一个响应头
+        - 兼容性较差
+#####CORS的使用
+主要是服务器端的设置：
+```
+app.get('/cors', (req, res) => {
+  //设置响应头
+  res.set('access-control-allow-origin', '*');  //允许所有网址跨域
+  
+  res.json({
+    name: 'jack',
+    age: 18
+  });
+})
+

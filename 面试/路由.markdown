@@ -1,0 +1,49 @@
+##分类管理路由
+  路由器中间件（能用post，get,use等简单的，但是没有listen等一些方法，只是小型的路由）
+  引入模块写在最上面，npm下载或者node核心模块在最上，如果是自定义模块，放后面点
+###子文件
+  * 引入Router : const {Router}=require('express');
+  * 通过Router创建小型的app路由器应用对象，取名为router ：const router = new Router;
+  * 通过router创建路由： 
+     *  router.get('/login', (req,res) => {
+       })
+  * 将router路由器应用对象暴露出去
+   * module.exports = router;
+  * 中间要加模块可以自己加
+   * 比如const {Router, urlencoded} = require('express');
+   * router.use(urlencoded({extended: true}));
+
+
+###父文件
+*     const express = require('express');
+        //
+        const db = require('./db/index')
+
+        const userRouter=require('./routers/userRouter');// 引入子文件的Route对象
+        const app = express();
+        db
+        .then(() => {
+         //应用路由器对象:将路由器对象挂载的路由挂载到app上
+          app.use(userRouter);
+        })
+        .catch(err => console.log(err))
+
+
+###路径问题
+ *  nodejs中核心模块: 处理路径问题
+ *  resolve方法传入多个路径,将多个路径解析为一个绝对路径
+ * 使用
+   * 引入  const {resolve} = require('path');
+   * 调用  res.sendFile(resolve(__dirname, '../', 'public/login.html'));
+   * 先找到__dirname在当前调用文件夹，然后../出去 ，最后找到public/login.html，（多个路径解析为一个绝对路径）
+
+###密文
+  * sha1加密库
+    * 1. 以不可逆的方法加密的
+    * 2. 同样的明文加密后会得到同样的密文
+  * 使用
+    * const sha1 = require('sha1');
+    * / 4. 保存用户数据 - 数据库
+    * const result = await Users.create({username, password: sha1(password), email});
+    * 注意登录时要将密码框输入的密码转换成密文的形式来查找
+    * const user = await Users.findOne({username, password: sha1(password)});

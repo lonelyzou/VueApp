@@ -60,7 +60,10 @@ export default {
     // })
   },
   computed: {
-    ...mapState(['address', 'categorys']),
+    ...mapState({
+      address: state => state.home.address, // state是总状态
+      categorys: state => state.home.categorys // state是总状态
+    }),
     /*
      根据categorys生成二维数组
      小数组最大长度是8

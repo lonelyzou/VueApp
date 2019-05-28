@@ -1,0 +1,77 @@
+## 4. 谈谈promise
+###是什么？
+ * Promise是抽象异步处理对象以及对其进行各种操作的组件，功能是可以将复杂的异步处理轻松地进行模式化
+ * 本质上Promise就是一个构造函数。
+###三个状态
+Promise的实例对象有三个状态
+pending: 初始状态，既不是成功，也不是失败状态。
+fulfilled: 意味着操作成功完成。
+rejected: 意味着操作失败
+
+###参数
+Promise的构造函数接收一个函数作为参数，一般我们称为executor,Promise构造函数执行时立即调用executor 函数并且传入两个参数：resolve，reject
+分别表示异步操作执行成功后的回调函数和异步操作执行失败后的回调函数。
+被调用时，分别将promise的状态改为fulfilled（完成）或rejected（失败）
+如果在executor函数中抛出一个错误，那么该promise 状态为rejected。executor函数的返回值被忽略。
+一旦从等待状态变为其他状态就不能再次改变
+构造Promise时，构造函数内部的代码是立即执行的。
+
+###then方法
+Promise对象上有then、catch方法
+当promise对象的状态发生改变时，绑定在其身上的then方法就会被调用。
+then方法可以接受两个参数，第一个参数是成功时的回调，在promise由“等待”态转换到“完成”态时调用，
+另一个是失败时的回调，在promise由“等待”态转换到“拒绝”态时调用。所以我们能够分别拿到他们传过来的数据。
+同时，then可以接受另一个promise传入，也接受一个“类then”的对象或方法，即thenable对象。
+then() 方法返回一个新的Promise，所以我们可以进行链式调用
+如果在then中使用return，那么return的值会被Promise.resolve()包装
+
+
+当你从 then 的回调函数返回的时候，这里有点小魔法。如果你返回一个值，它就会被传给下一个 then 的回调；
+而如果你返回一个“类 Promise”的对象，则下一个 then 就会等待这个 Promise 明确结束（成功/失败）才会执行。
+
+##Generator
+你理解的Generator是什么？
+Generator定义的函数(function关键字后跟一个星号），调用后后会返回一个生成器对象。 生成器对象符合可迭代协议
+第一次调用生成器对象的next方法时, generator函数才会被执行
+
+###yield
+yield关键字使生成器函数执行暂停。yield关键字会和一个迭代对象挂钩，迭代对象有两个属性，value和done。value属性是对yield表达式求值的结果，而done是false，表示生成器函数尚未完全完成。yield关键字后面的表达式的值 返回给  生成器对象的next方法对应的value。
+next方法对应的value是谁，取决于next方法执行后在哪个yield表达式上暂停
+
+每次调用生成器的next()方法时，生成器都会恢复执行,如果将可选值传递给生成器的next()方法，则该值将成为生成器当前yield启动时返回的值。
+next方法对应的参数给谁，取决于next方法执行后在哪个yield表达式上启动
+
+
+
+Generator可以控制函数的执行
+function *foo(x){
+let y=2*(yield(x+1))
+let z=yield(y/3)
+return (x+y+z)
+}
+let it=foo(5)
+it.next()		// {value:6,done:false}
+it.next(12)
+it.next(13)
+复制代码Generator函数调用会返回一个迭代器，第一次next，函数停在yield(x+1)所以value=5+1=6; 第二次next,传入参数相当于上一个yield的值，即let y=2*12=24; let z=24/3=8;第三次next,传入参数相当于上一个yield的值，即let z=13,y=24,x=5，相加返回42
+
+
+##async，await
+###async
+正常函数前加一个async关键字后，该函数就被定义成了一个async函数。
+当调用一个 async 函数时，会返回一个 Promise 对象。
+当这个 async 函数返回一个值时，Promise 的 resolve 方法会负责传递这个值；
+当 async 函数抛出异常时，Promise 的 reject 方法也会传递这个异常值。
+###await  
+await 操作符用于等待一个Promise 对象。它只能在async function 中使用。
+await 表达式会暂停当前 async function 的执行，等待 Promise 处理完成。
+若 Promise 正常处理(fulfilled)，!!其回调的resolve函数参数作为 await 表达式的值!!，继续执行 async function。
+若 Promise 处理异常(rejected)，await 表达式会把 Promise 的异常原因抛出。
+###对async，await的理解，内部原理
+async就是将函数返回值使用Promise.resolve()包裹一下，和then中处理返回值一样，并且async只能搭配await使用
+await其实就是generator加上Promise的语法糖，且内部实现了自动执行generator
+
+##async,await相比于promise的优势
+优势在于处理then的调用链，能够更清晰准确的写出代码
+缺点：await将异步代码改造成同步，如果多个异步代码之间没有依赖性却使用了await会导致性能降低
+

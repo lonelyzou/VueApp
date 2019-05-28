@@ -1,0 +1,505 @@
+#flex
+弹性盒子模型?flex|box区别?
+
+(1) 引入弹性盒布局模型的目的是提供一种更加有效的方式来对一个容器中的条目进行排列、对齐和分配空白空间。
+
+即便容器中条目的尺寸未知或是动态变化的，弹性盒布局模型也能正常的工作。在该布局模型中，容器会根据布局的需要，调整其中包含的条目的尺寸和顺序来最好地填充所有可用的空间。
+
+当容器的尺寸由于屏幕大小或窗口尺寸发生变化时，其中包含的条目也会被动态地调整。比如当容器尺寸变大时，其中包含的条目会被拉伸以占满多余的空白空间；当容器尺寸变小时，条目会被缩小以防止超出容器的范围。弹性盒布局是与方向无关的。
+
+在传统的布局方式中，block 布局是把块在垂直方向从上到下依次排列的；
+而 inline 布局则是在水平方向来排列。弹性盒布局并没有这样内在的方向限制，可以由开发人员自由操作。 
+
+(2) flex和box的区别: display：box 是老规范，要兼顾古董机子就加上它； 父级元素有display:box;属性之后。他的子元素里面加上box-flex属性。可以让子元素按照父元素的宽度进行一定比例的分占空间。 flex是最新的，董机老机子不支持的；
+
+父元素设置display:flex后，子元素宽度会随父元素宽度的改变而改变，而display:box不会。 Android UC浏览器只支持display: box语法；而iOS UC浏览器则支持两种方式。
+
+#如何理解HTML结构的语义化？
+
+所谓标签语义化，就是指标签的含义。语义化的主要目的就是让大家直观的认识标签(markup)和属性(attribute)的用途和作用，对搜索引擎友好，有了良好的结构和语义我们的网页内容便自然容易被搜索引擎抓取，这种符合搜索引擎收索规则的做法，网站的推广便可以省下不少的功夫，而且可维护性更高，因为结构清晰,十分易于阅读。这也是搜索引擎优化SEO重要的一步
+
+#html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？
+
+* HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。
+* 拖拽释放(Drag and drop) API 语义化更好的内容标签(header,nav,footer,aside,article,section) 音频、视频API(audio,video) 画布(Canvas) API 地理(Geolocation) API 本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失； 
+sessionStorage 的数据在浏览器关闭后自动删除 表单控件，calendar、date、time、email、url、search 新的技术webworker, websocket, Geolocation 
+* 移除的元素 纯表现的元素：basefont，big，center，font, s，strike，tt，u； 
+对可用性产生负面影响的元素：frame，frameset，noframes；
+支持HTML5新标签： 
+* IE8/IE7/IE6支持通过document.createElement方法产生的标签， 可以利用这一特性让这些浏览器支持HTML5新标签， 浏览器支持新标签后，还需要添加标签默认的样式： 
+* 当然最好的方式是直接使用成熟的框架、使用最多的是html5shim框架 <!--[if lt IE 9]> <script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script> <![endif]--> 
+* 如何区分： DOCTYPE声明\新增的结构元素\功能元素
+
+#CSS3有哪些新特性？
+
+CSS3实现圆角（border-radius），阴影（box-shadow），
+对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）
+transform:rotate(9deg) scale(0.85,0.90) translate(0px,-30px) skew(-9deg,0deg);
+//旋转,缩放,定位,倾斜增加了更多的CSS选择器 多背景 rgba 在CSS3中唯一引入的伪元素是::selection.媒体查询，多栏布局 border-image
+# .video标签的几个个属性方法
+
+src：视频的URL poster：视频封面，没有播放时显示的图片 preload：预加载 autoplay：自动播放 loop：循环播放 controls：浏览器自带的控制条 width：视频宽度 height：视频高度
+
+# canvas在标签上设置宽高 和在style中设置宽高有什么区别？
+
+canvas标签的width和height是画布实际宽度和高度，绘制的图形都是在这个上面。而style的width和height是canvas在浏览器中被渲染的高度和宽度。如果canvas的width和height没指定或值不正确，就被设置成默认值 。
+
+# ES6的了解
+   ##es6
+###et&const
+ES6 新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效
+const声明一个只读的常量。一旦声明，常量的值就不能改变
+增加了块级作用域
+ES6规定， var 命令和 function 命令声明的全局变量，属于全局对象的属性； 
+let 命令、 const 命令、 class 命令声明的全局变量，不属于全局对象的属性
+#####规则
+* 不允许重复声明 :let不允许在相同作用域内，重复声明同一个变量
+* 不存在变量提升: 所声明的变量一定要在声明后使用，否则报错。
+* 封闭性 :如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错
+
+###解构赋值
+###模板字符串（为JavaScript提供了简单的字符串插值功能）
+###三点运算符 (…)
+###箭头函数
+箭头函数与普通函数的区别：
+    箭头函数没有arguments（用剩余运算符替代）
+    箭头函数没有prototype，不能作为构造函数（不能用new关键字调用）
+    箭头函数没有自己的this，引用的是外层执行上下文的this
+### Array.from() 方法从一个类似数组或可迭代对象中创建一个新的数组实例
+###通过class关键字，可以定义类
+###for-of （用来遍历数据—例如数组中的值。）
+    for-of与for-in的区别
+    for-of遍历获取的是对象的键值，for-in获取的是键名
+    for-in会遍历对象的整个原型链，性能差，for...of只遍历当前对象不会遍历原型链
+    对于数组的遍历，for-in会遍历所有可枚举属性（包括原型链），for...of只返回数组下标所对应的属性值
+    for...of的原理
+    利用了遍历对象内部的iterator接口，将for...of循环分解为最原始的for循环
+###Promise
+###es6模块化 
+    
+
+
+# JavaScript单线程
+在浏览器的一个页面中，该页面的JS程序只有一个线程，故曰单线程。因为是单线程，所以程序的执行顺序就是从上到下依次执行，同一时间内只能有一段代码被执行。
+虽然JavaScript是单线程的，可是浏览器内部不是单线程的。你的一些I/O操作、定时器的计时和事件监听（click, keydown…）等都是由浏览器提供的其他线程来完成的。
+
+如果想利用多线程处理一些耗时较长的任务，可以使用HTML5提出的Web Worker。
+
+## 1. 浏览器的事件轮询机制
+JavaScript 的主线程是单线程的，但是也有其他的线程去帮我们实现异步操作，比如定时器线程、事件线程、Ajax 线程。
+当js引擎解析js代码时，一旦遇到异步代码，就会分出一个分线程去执行异步操作，先将回调函数及其时间交由浏览器
+的一个模块进行管理，完成计时任务，当计时完毕后，会将回调函数放入回调队列中，等js引擎主线程解析完全部代码后，
+就会开启事件轮询，不断地去访问回调队列，将回调函数依次取出，同步执行，执行完后js引擎会进入休眠状态，过一段时间后又会醒来去查看回调队列，若有回调函数，又会依次取出，同步执行，之后不断循环此过程。
+## 2. nodejs的事件轮询机制
+https://nodejs.org/zh-cn/docs/guides/event-loop-timers-and-nexttick/
+
+Node 的整个事件轮询机制是 Libuv 库实现的。
+第一步定时器：执行已经安排的setTimeout()和setInterval()回调函数
+第二步待定回调：执行延迟到下一个循环迭代的I/O回调，也就是TCP错误回调函数
+第三步idle,prepare：仅系统内部使用
+第四步轮询
+       轮询回调队列，看是否有回调函数要执行；
+	        回调队列有内容：依次取出，同步执行，直到队列为空或者达到系统最大限制
+			回调队列没内容：如果之前设置了setImmediate函数，就会去下一个阶段，没设置就在当前阶段等待
+			                特例：定时器到点也会去下一个阶段							
+第五步检测：setImmediate函数就在这阶段执行
+第六步关闭的回调函数：一些关闭的回调函数
+process.nextTick函数会在任意阶段优先执行
+事件轮询是死循环，第六步执行完后又会回到第一步
+Node 事件轮询中，轮询到每一个队列时，都会将当前队列任务清空后，在切换下一队列之前清空一次微任务队列，这是与浏览器端不一样的。
+浏览器端会在宏任务队列当中执行一个任务后插入执行微任务队列，清空微任务队列后，再回到宏任务队列执行下一个宏任务。
+
+# 闭包
+   在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。能够读取其他函数内部变量的函数。简单来说就是一个函数访问了它的外部变量。
+    当函数可以记住并访问自己作用域链时就会产生闭包，也就是外部函数的执行上下文被创建时产生
+	产生条件是函数的嵌套，内部函数必须要使用到外部函数的变量
+    其中闭包放在了内部函数的作用域链中
+    用处	延长外部函数执行上下文变量的周期
+		
+ 闭包的缺点就是常驻内存会增大内存使用量，并且使用不当很容易造成内存泄露。
+ 如果不是因为某些特殊任务而需要闭包，在没有必要的情况下，在其它函数中创建函数是不明智的，因为闭包对脚本性能具有负面影响，包括处理速度和内存消耗。
+ 
+## 2. 谈谈原型
+原型链作为实现继承的主要方法。其基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法
+每一个JavaScript对象(null除外)在创建的时候就会与之关联另一个对象，这个对象就是我们所说的原型
+原型分为两种，一种为显式原型，所有的函数都有一个显式原型（.prototype）;一种为隐式原型，所有的对象都有一个隐式原型（.proto）;
+其中所有的对象的隐式原型指向其构造函数的显式原型，并且每个原型对象都有个constructor属性指向其构造函数
+但是大写的Function构造函数的隐式原型指向其本身的显式原型，
+
+
+
+# 响应状态码：
+    1xx：请求接受了，但是还需要进一步处理
+    2xx：响应成功状态
+      200  OK
+    3xx 请求资源重定向（资源我这里没有，你去其他地方找）
+      301 永久重定向，资源永久被转移到新网址，搜索引擎抓新网址内容和新网址
+      302 临时重定向，资源临时被转移到新网址，搜索引擎抓新网址内容和旧网址
+      304 资源重定向浏览器缓存中
+    4xx 请求资源没有找到，浏览器端错误
+      404 输入网址有误
+    5xx 服务器出错了
+      500
+
+# 从一个地址栏输入一个url网址，到网页最终渲染完成，发生了什么?
+/*
+  从一个地址栏输入一个url网址，到网页最终渲染完成，发生了什么?
+    1. DNS解析
+      将域名解析为ip地址
+      - 走缓存
+        - 浏览器DNS缓存
+        - 本机DNS缓存
+        - 路由器DNS缓存
+        - 网络运营商服务器DNS缓存 （80%的DNS解析在这完成的）
+      - 递归查询
+        www.a.b.com.cn
+    2. TCP连接
+      TCP三次握手
+        - 第一次握手：浏览器发给服务器，告诉服务器，我将要发送请求
+        - 第二次握手：服务器发送浏览器，告诉浏览器，我准备好了，你放马过来
+        - 第三次握手：浏览器发送服务器，告诉浏览器，我来了
+        - 三次握手主要是为了防止已经失效的请求报文字段发送给服务器，浪费资源。
+    3. 发送请求
+      请求报文
+    4. 返回响应
+      响应报文
+    5. 解析报文，渲染页面
+      先预解析（将需要发送请求的标签的请求发出去）
+      从上到下解析html文件
+        遇到HTML标签，调用html解析器将其解析DOM树
+        遇到css标记，调用css解析器将其解析CSSOM树
+          link 阻塞 - 为了解决闪屏，所有解决闪屏的样式
+          style 非阻塞，与闪屏的样式不相关的
+        将DOM树和CSSOM树结合在一起，形成render树
+        layout布局 render渲染
+        
+        遇到script标签，阻塞，调用js解析器解析js代码，可能会修改DOM树，也可能会修改CSSOM树，
+        将DOM树和CSSOM树结合在一起，形成render树
+        layout布局 render渲染（重排重绘）
+        
+        script标签的属性
+          async 异步 谁先回来谁就先解析，不阻塞
+          defer 异步 按照先后顺序（defer）解析，不阻塞
+        script标签放在body下，放置多次重排重绘，能够操作dom
+    6. 断开链接
+      TCP四次挥手（浏览器挥手两次，服务器挥手两次。 断开请求需要两次挥手, 断开响应需要两次挥手）
+        第一次挥手：浏览器发送服务器，告诉服务器，我东西（请求报文）发完了，服务器准备关闭
+        第二次挥手：服务器发送浏览器，告诉浏览器，我东西接受完了，我准备关闭，你也准备关闭
+        第三次挥手：服务器发送浏览器，告诉浏览器，我东西（响应报文）发完了，浏览器准备关闭
+        第四次挥手：浏览器发送服务器，告诉服务器，我东西接受完了，我准备关闭，你也准备关闭
+ */
+ 
+# ###AJAX
+* AJAX 简介
+ * AJAX 全称为Asynchronous Javascript And XML，就是异步的 JS 和 XML。
+ * 通过AJAX可以在浏览器中向服务器发送异步请求。
+ * AJAX 不是新的编程语言，而是一种使用现有标准的新方法。
+* AJAX的工作原理
+  * Ajax的工作原理相当于在用户和服务器之间加了一个中间层(Ajax引擎)，当js引擎解析到Ajax，就交由Ajax引擎解析，并将异步请求发送给服务器，服务器返回响应给Ajax引擎，Ajax引擎又把数据返回给浏览器，使用户操作与服务器响应异步化。
+* AJAX的使用: 发送ajax请求
+ 1. 创建xhr对象
+
+            const xhr = new XMLHttpRequest();
+ 2. 绑定事件监听
+ 
+             //xhr.responseXML 接收xml格式的响应数据
+             //xhr.responseText 接收文本格式的响应数据
+
+             xhr.onreadystatechange = () => {
+                xhr.readyState ajax内部状态
+                  0: 代表xhr对象被创建好了，初始化状态
+                  1: 代表xhr.send方法还未调用（还未发送请求），还可以设置请求头相关信息
+                  2: 代表xhr.send方法已经调用（已经发送请求了），并且接受到了部分响应数据（响应首行和响应头 --> 响应状态码，响应头信息）
+                  3: 代表接受了部分/全部响应体数据（数据小就全部接受了，数据大就还没接受完）
+                  4: 代表接受了全部响应体数据（响应完成了，全部接受完了）
+             xhr.status 响应状态码
+             
+               //当readystate值发生变化的时候，就触发当前事件
+             xhr.onreadystatechange = function () {
+                console.log('onreadystatechange()');
+                //接受响应的内容
+               if (xhr.readyState === 2) {
+                console.log('来到了readyState===2的时候');
+                console.log(xhr.status);
+                console.log(xhr.getResponseHeader('ETag'));
+                }
+                  if (xhr.readyState === 3) {
+                    console.log('来到了readyState===3的时候');
+                    console.log(xhr.responseText);  //响应数据
+                  }
+                  if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log('来到了readyState===4的时候');
+                    console.log(xhr.responseText);  //响应数据
+                  }
+                }
+              }
+ 3. 设置请求信息
+
+            xhr.open(请求方式, 请求地址(get请求的查询字符串参数));
+            xhr.setRequestHeader(key, value); 设置请求头信息
+            xhr.open('GET', 'http://localhost:3000/ajax?username=jack&password=123&date=' + Date.now());
+            xhr.setRequestHeader('xxxx', 'xxxxx');
+            // xhr.open('POST', 'http://localhost:3000/ajax');
+            // xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+ 4. 发送请求
+
+             xhr.send(body(post请求的请求体参数-要求以urlencoded方法编码));
+             xhr.send();
+             // xhr.send('username=jack&password=123'); post请求发送数据
+             // 取消发送的ajax请求
+              xhr.abort();//常用于验证码重复获取
+   
+* 解决IE缓存问题
+  * 问题：在一些浏览器中(IE),由于缓存机制的存在，ajax只会发送的第一次请求，剩余多次请求不会在发送给浏览器而是直接加载缓存中的数据。 
+  * 解决方式：浏览器的缓存是根据url地址来记录的，所以我们只需要修改url地址即可避免缓存问题
+xhr.open("get","/testAJAX?t="+Date.now());
+
+* 问题:
+  * GET请求
+            chrome/firefox 能够缓存get请求, 但是缓存是需要访问服务器然后才走的协商缓存 状态码304
+            ie 能够缓存get请求, 但是缓存是没有访问服务器,直接自己浏览器实现了强制缓存 状态码200
+              -->  同样的请求拿不到最新的数据
+  * 解决: 让请求每次都不一样, 这样就不会缓存了.  http://localhost:3000/ajax?date= Date.now() / Math.random()
+  * 缺点: 当前请求就没办法缓存了
+
+# Ajax有哪些优缺点？
+优点：1.通过异步模式，提升用户体验；2.优化了浏览器和服务器之间的传输，减少不必要的数据往返，减少了带宽占用；3.Ajax在客户端运行，承担了一部分本来由服务器承担的工作，减少了大用户量下的服务器负载；4.Ajax可以实现局部刷新
+缺点：1.Ajax暴露了与服务器交互的的细节；2.对搜索引擎的支持较弱；3.不容易调试
+
+###jQuery中的AJAX
+* get请求
+ * $.get(url, [data], [callback], [type])
+   * url:请求的URL地址。
+   * data:请求携带的参数。
+   * callback:载入成功时回调函数。
+   * type:设置返回内容格式，xml, html, script, json, text, _default。
+           
+             $.ajax({
+                  url: 'http://localhost:3000/ajax',  //请求地址
+                  method: 'GET',  //请求方式
+                  data: {      //get请求查询字符串参数
+                    username: 'jack',
+                    age: 20
+                  },
+                  success: function (data) {  //响应成功的回调函数
+                    console.log(data);
+                  },
+                  error: function (error) {  //响应失败的回调函数
+                    console.log(error);
+                  }
+                })
+* post请求
+ * $.post(url, [data], [callback], [type])
+   * url:请求的URL地址。
+   * data:请求携带的参数。
+   * callback:载入成功时回调函数。
+   * type:设置返回内容格式，xml, html, script, json, text, _default。
+            
+                $.ajax({
+                  url: 'http://localhost:3000/ajax',  //请求地址
+                  method: 'POST',  //请求方式
+                  data: {      //请求参数
+                    username: 'jack',
+                    age: 20
+                  },
+                  success: function (data) {  //响应成功的回调函数
+                    console.log(data);
+                  },
+                  error: function (error) {  //响应失败的回调函数
+                    console.log(error);
+                  }
+                })
+
+* 简写型   
+
+        $.get/post(请求地址[,请求参数],成功的回调函数)
+        $.get('http://localhost:3000/ajax', {username: 'bob', age: 18}, function (data) {
+              console.log(data);
+        })
+
+###缓存流程
+  1. 强缓存：通常不修改文件 不会访问服务器
+   * http1.1 判断cache-control
+   * http1.0 判断expires
+   * 命中强缓存 状态为200
+     * from memory cache 来自内存缓存
+     * from disk cache   来自磁盘缓存（内存大）
+  2. 协商缓存：经常修改的文件  一定会访问服务器
+     * 请求头
+        if-modified-since  if-none-match
+     * 响应头
+        last-modified   etag
+     * etag/if-none-match  代表文件有没有被修改
+       * if-modified-since/last-modified    代表文件修改时间
+      - 首先看etag有没有变化，
+        如果没有没变化，直接走协商缓存，返回状态码为304
+        如果有变化（说明文件被修改了）
+          再去看last-modified的值，与当前时间进行对比
+            如果当前时间小于last-modified的值，说明没有过期，直接走协商缓存，返回状态码为304
+            反之，就过期了，返回新的资源文件，状态码为200
+
+## 5. 请写出git常用指令
+* 本地有仓库，远程没有
+	* 本地开发了代码，还没添加到git管理（初始化项目仓库）
+	* 创建远程仓库
+		* github / gitlab
+	* 本地git管理
+		* git init
+		* git add .
+		* git commit -m 'xxx'
+		* git remote add origin xxx 关联仓库
+		* git push origin master/dev 提交
+		* git pull origin master/dev 更新
+		* git checkout dev 切换dev分支
+		* git branch dev 新建dev分支
+* 远程有仓库，本地没有
+	* 去公司，公司有开发过代码，你接下来参与开发
+	* git clone xxx 
+	* 问题：
+		* 克隆到本地只有master分支，需要再dev开发
+		* git fetch origin dev:development 拉取远程仓库dev分支的内容到本地development分支上
+
+
+# 1.vue的生命周期
+
+简单的说生命周期就是事物从产生到消失的一个时间过程。那么vue的生命周期就是从其被创建到销毁的过程，其中包含了开始创建、初始化数据、编译模板、挂载dom（渲染） ，渲染->更新->渲染、销毁（卸载）等一系列过程。
+
+那么其中的钩子函数都担负着自己的职责，较为常用的就是created和mounted函数，可以在函数中编写相关的业务逻辑。
+
+2.钩子函数
+
+beforeCreate
+
+在实例初始化之后，数据观测和事件、生命周期初始化配置之前被调用。
+
+created
+
+实例已经创建完成之后被调用。在这一步，实例已完成以下的配置：数据观测，属性和方法的运算，事件回调。然而，挂载阶段还没开始，$el 属性目前不可见。
+
+beforeMount
+
+在挂载开始之前被调用：相关的 render 函数首次被调用，此时有了虚拟DOM。
+
+mounted
+
+el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子，渲染为真实DOM。
+
+beforeUpdate
+
+在数据更新之前时调用，发生在虚拟 DOM 重新渲染和打补丁之前。 你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。
+
+updated
+
+由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。
+
+当这个钩子被调用时，组件 DOM 已经更新，所以你现在可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态，因为这可能会导致更新无限循环。
+
+值得注意的是：该钩子在服务器端渲染期间不被调用。
+
+beforeDestroy
+
+实例销毁之前调用。此时，实例仍然是可用的。
+
+destroyed
+
+vue 实例销毁后调用。调用后，vue 实例指示的所有东西都会解绑，所有的事件监听器会被卸载移除，所有的子实例也会被销毁。 
+
+值得注意的是：该钩子在服务器端渲染期间不被调用。
+
+### 4. 总结this指向问题
+
+* 函数直接调用，this指向window（如果是严格模式，是undefined）
+* 隐式调用，指向调用它的对象
+* 显示调用，call/apply/bind 指向传入第一个参数
+* new 调用，指向新创建的实例对象
+* 回调函数
+  * 事件回调函数 this指向被绑定事件的DOM对象
+  * 普通回调函数（定时器，map）：this指向window（如果是严格模式，是undefined）
+* 箭头函数：指向离他最近的包裹它的函数的this，如果没有就是window
+* 框架中的生命周期函数
+  * 生命周期函数this指向组件的实例对象
+  * 其他自定义函数this指向undefined  
+* 基本class中方法，this指向实例对象                                                                                                 
+
+###mock数据
+import Mock from 'mockjs'
+import category from './category'
+/ 产生mock接口
+Mock.mock('/category', {code: 0, data: category})
+
+
+##预处理器总结
+1.嵌套可以反映层级和约束
+	2.变量和计算可以减少重复代码
+	3.Extend 和 Mixin可以复用代码片段
+	4.循环适用于复杂有规律的样式
+	5.import css文件模块化合并!!!
+	
+
+##三种css预处理器的对比
+| 对比 | 	Less  | Sass | Stylus |
+| ------ | ------ | ------ | ------ |
+| 声明变量 |  声明变量用『@』开头，其余等同 Sass | 声明变量必须是『$』开头，后面紧跟变量名和变量值，而且变量名和变量值需要使用冒号：分隔开 |声明变量没有任何限定，结尾的分号可有可无，但变量名和变量值之间必须要有『等号』。但需要注意的是，如果用“@”符号来声明变量，Stylus会进行编译，但不会赋值给变量。就是说，Stylus 不要使用『@』声明变量。Stylus 调用变量的方法和Less、Sass完全相同|
+| 赋值方式	 | 通过 var-name: var-value; 的方式 | 与less一致 | Stylus 通过 = 赋值的方式，类似于编程语言的编程方式 |
+| 作用域 |  JS 一样，逐级查找，向上冒泡 |三者最差，不存在全局变量的概念。也就是说在 Sass 中定义了相同名字的变量时你就要小变态了 |完全等同 Less。Stylus 和 Sass 则更倾向于指令式 |
+| 嵌套	 | less本身没有循环的语法是通过递归来构建循环	 |  雷同	 | 	雷同 |
+| 继承 | &:extend(.inline);   | @extend .class | 同sass
+| mixin(混合) | @mixin+@include   | 混合使用@mixin声明  有别于less中的.调用时必须@include|直接调用：混合名（参数）
+| @import |  @import "lib.less";   | @import "lib.less";	 |@import "lib.less";
+
+
+##面向对象
+类和实例是大多数面向对象编程语言的基本概念。
+JavaScript不区分类和实例的概念，而是通过原型（prototype）来实现面向对象编程。
+把对象1的原型指向了对象2，看上去对象2仿佛是从对象1继承下来的
+JavaScript的原型链和Java的Class区别就在，它没有“Class”的概念，所有对象都是实例，所谓继承关系不过是把一个对象的原型指向另一个对象而已。
+
+JavaScript的原型继承实现方式就是：
+定义新的构造函数，并在内部用call()调用希望“继承”的构造函数，并绑定this；
+借助中间函数F实现原型链继承，最好通过封装的inherits函数完成；
+继续在新的构造函数的原型上定义新方法。
+
+javaScript的对象模型是基于原型实现的，特点是简单，缺点是理解起来比传统的类－实例模型要困难，最大的缺点是继承的实现需要编写大量代码，并且需要正确实现原型链。
+新的关键字class从ES6开始正式被引入到JavaScript中。class的目的就是让定义类更简单。
+
+
+#从输入 url 到展示的过程
+
+DNS 解析
+TCP 三次握手
+发送请求，分析 url，设置请求报文(头，主体)
+服务器返回请求的文件 (html)
+浏览器渲染
+
+HTML parser --> DOM Tree
+
+标记化算法，进行元素状态的标记
+dom 树构建
+
+
+CSS parser --> Style Tree
+
+解析 css 代码，生成样式树
+
+
+attachment --> Render Tree
+
+结合 dom树 与 style树，生成渲染树
+
+
+layout: 布局
+GPU painting: 像素绘制页面
+
+作者：郭东东
+链接：https://juejin.im/post/5c64d15d6fb9a049d37f9c20
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+	
+
+
+
+
+
+		
+			
+
