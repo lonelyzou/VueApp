@@ -130,3 +130,47 @@ props 是父组件向子组件传值的方式。如果父组件传递的 props �
 
 ###immutable.js
 使用immutable.js 的不可变数据。
+
+##vue路由的使用
+````
+// 0. 如果使用模块化机制编程，导入Vue和VueRouter，要调用 Vue.use(VueRouter)
+
+// 1. 定义 (路由) 组件。
+// 可以从其他文件 import 进来
+const Foo = { template: '<div>foo</div>' }
+const Bar = { template: '<div>bar</div>' }
+
+// 2. 定义路由
+// 每个路由应该映射一个组件。 其中"component" 可以是
+const routes = [
+  { path: '/foo', component: Foo },
+  { path: '/bar', component: Bar }
+]
+
+// 3. 创建 router 实例，然后传 `routes` 配置
+const router = new VueRouter({
+  routes 
+})
+
+// 4. 创建和挂载根实例。
+// 记得要通过 router 配置参数注入路由，
+// 从而让整个应用都有路由功能
+const app = new Vue({
+  router
+}).$mount('#app')
+
+通过注入路由器，我们可以在任何组件内通过 this.$router 访问路由器，也可以通过 this.$route 访问当前路由：
+`````
+
+##js实现无限层级树形数据结构（创新算法）
+
+````
+function setTreeData(source){
+    let cloneData = JSON.parse(JSON.stringify(source))      // 对源数据深度克隆
+    return  cloneData.filter(father=>{                      // 循环所有项，并添加children属性
+        let branchArr = cloneData.filter(child=> father.id == child.parentId);   // 返回每一项的子级数组
+        branchArr.length>0 ? father.children=branchArr : ''   //给父级添加一个children属性，并赋值
+        return father.parentId==0;      //返回第一层
+    });
+}
+````
